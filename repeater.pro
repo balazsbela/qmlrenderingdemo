@@ -5,11 +5,11 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-           models/qqmlvariantlistmodel.cpp
+           models/QQmlObjectListModel.cpp \
+           models/QQmlVariantListModel.cpp
 
-HEADERS += models/qqmlvariantlistmodel_p.h \
-           models/qqmlvariantlistmodel.h \
-           models/qqmlmodels.h
+HEADERS += models/QQmlObjectListModel.h \
+           models/QQmlVariantListModel.h
 
 RESOURCES += qml.qrc
 

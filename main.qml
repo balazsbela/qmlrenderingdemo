@@ -39,9 +39,8 @@ ApplicationWindow {
 
             for (var i =0; i < slider.value; i++ )
             {
-                //              console.log("appending")
                 modelTest.append({ "bg" : Qt.hsla (Math.random (), 0.85, 0.45, 1.0).toString (),
-                                     "height" : i + 100
+                                   "height" : i + 100
                                  });
             }
 
@@ -123,7 +122,7 @@ ApplicationWindow {
         id: slider
         height:60
         width:500
-        maximumValue: 10000.0
+        maximumValue: 100000.0
         stepSize: 1.0
 
         onValueChanged: {

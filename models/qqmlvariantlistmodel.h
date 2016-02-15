@@ -1,45 +1,51 @@
 #ifndef QQMLVARIANTLISTMODEL_H
 #define QQMLVARIANTLISTMODEL_H
 
-#include "qqmlmodels.h"
-
-class QQmlVariantListModelPrivate;
+#include <QObject>
+#include <QAbstractListModel>
+#include <QVariant>
+#include <QList>
 
 class QQmlVariantListModel : public QAbstractListModel {
     Q_OBJECT
     Q_PROPERTY (int count READ count NOTIFY countChanged)
 
 public:
-    explicit QQmlVariantListModel (QObject * parent = nullptr);
-    virtual ~QQmlVariantListModel ();
+    explicit QQmlVariantListModel (QObject * parent = Q_NULLPTR);
+    ~QQmlVariantListModel (void);
 
 public: // QAbstractItemModel interface reimplemented
-    virtual int rowCount (const QModelIndex & parent = QModelIndex ()) const;
-    virtual bool setData (const QModelIndex & index, const QVariant & value, int role);
-    virtual QVariant data (const QModelIndex & index, int role) const;
-    virtual QHash<int, QByteArray> roleNames () const;
+    int rowCount (const QModelIndex & parent = QModelIndex ()) const;
+    bool setData (const QModelIndex & index, const QVariant & value, int role);
+    QVariant data (const QModelIndex & index, int role) const;
+    QHash<int, QByteArray> roleNames (void) const;
 
 public slots: // public API
-    void clear ();
-    int count () const;
-    bool isEmpty () const;
-    void append (QVariant item);
-    void prepend (QVariant item);
-    void insert (int idx, QVariant item);
-    void appendList (QVariantList itemList);
-    void prependList (QVariantList itemList);
-    void replace (int pos, QVariant item);
-    void insertList (int idx, QVariantList itemList);
+    void clear (void);
+    int count (void) const;
+    bool isEmpty (void) const;
+    void append (const QVariant & item);
+    void prepend (const QVariant & item);
+    void insert (int idx, const QVariant & item);
+    void appendList (const QVariantList & itemList);
+    void prependList (const QVariantList & itemList);
+    void replace (int pos, const QVariant & item);
+    void insertList (int idx, const QVariantList & itemList);
     void move (int idx, int pos);
     void remove (int idx);
     QVariant get (int idx) const;
-    QVariantList list () const;
+    QVariantList list (void) const;
 
 signals: // notifiers
     void countChanged (int count);
 
+protected:
+    void updateCounter (void);
+
 private:
-    QQmlVariantListModelPrivate * m_privateImpl;
+    int                    m_count;
+    QVariantList           m_items;
+    QHash<int, QByteArray> m_roles;
 };
 
 #endif // QQMLVARIANTLISTMODEL_H
